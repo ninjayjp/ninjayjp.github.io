@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gtv弹弹堂-经典弹射对战游戏攻略与玩家互动平台</title>
+    <meta name="description" content="gtv弹弹堂是深受玩家喜爱的弹射对战网页游戏，这里提供最新游戏攻略、武器搭配、副本打法、新手入门指南及玩家交流社区，助你轻松成为弹射高手。">
+    <meta name="keywords" content="gtv弹弹堂,弹弹堂攻略,弹弹堂武器,弹射游戏,弹弹堂新手,弹弹堂副本">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+            background: #f4f7fc;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        ul {
+            list-style: none;
+        }
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        /* 页眉 */
+        .site-header {
+            background: linear-gradient(145deg, #0f3c7a 0%, #1b5bbf 100%);
+            padding: 14px 0;
+            box-shadow: 0 4px 16px rgba(0, 20, 40, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .logo-area h1 {
+            font-size: 1.9rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        .logo-area h1 span {
+            color: #ffd966;
+        }
+        .main-nav ul {
+            display: flex;
+            gap: 28px;
+            flex-wrap: wrap;
+            padding: 6px 0;
+        }
+        .main-nav a {
+            color: #e6f0ff;
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 6px 2px;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        .main-nav a:hover {
+            color: #ffd966;
+            border-bottom-color: #ffd966;
+        }
+        .user-entry {
+            display: flex;
+            gap: 12px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-light {
+            background: #ffd966;
+            color: #0f3c7a;
+        }
+        .btn-light:hover {
+            background: #ffc53d;
+            transform: translateY(-2px);
+        }
+        .btn-outline-light {
+            background: transparent;
+            color: #fff;
+            border: 1.5px solid rgba(255,255,255,0.6);
+        }
+        .btn-outline-light:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        /* 英雄横幅 */
+        .hero {
+            background: radial-gradient(circle at 20% 20%, #2a6fd6, #0a2f63 90%);
+            color: #fff;
+            padding: 60px 0 70px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: #f4f7fc;
+            border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+        }
+        .hero h2 {
+            font-size: 2.8rem;
+            margin-bottom: 18px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            color: #d4e6ff;
+            line-height: 1.8;
+        }
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .btn-hero {
+            background: #ffd966;
+            color: #0f3c7a;
+            padding: 12px 36px;
+            font-size: 1.1rem;
+            border-radius: 40px;
+            font-weight: 700;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        .btn-hero:hover {
+            background: #ffc53d;
+            transform: scale(1.03);
+        }
+        .btn-ghost {
+            background: transparent;
+            color: #fff;
+            border: 2px solid rgba(255,255,255,0.7);
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            border-radius: 40px;
+            font-weight: 600;
+        }
+        .btn-ghost:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        /* 游戏特色卡片 */
+        .features {
+            padding: 50px 0 20px;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #123b6d;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #ffd966, #ff9f43);
+            border-radius: 4px;
+        }
+        .section-sub {
+            text-align: center;
+            color: #5a7ba0;
+            margin: 25px 0 40px;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 28px;
+            margin-top: 20px;
+        }
+        .feature-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 32px 22px;
+            text-align: center;
+            box-shadow: 0 8px 24px rgba(28, 53, 94, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid #eef2f7;
+        }
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 16px 32px rgba(28, 53, 94, 0.12);
+            border-color: #c9ddf5;
+        }
+        .feature-icon {
+            font-size: 3.2rem;
+            margin-bottom: 18px;
+            display: block;
+            line-height: 1.2;
+        }
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            color: #1b4f8a;
+        }
+        .feature-card p {
+            color: #5e7a9a;
+            font-size: 0.95rem;
+        }
+        /* 热门攻略 */
+        .guides {
+            padding: 40px 0;
+        }
+        .guide-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .guide-card {
+            background: #fff;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+            transition: all 0.3s;
+            border: 1px solid #edf2f9;
+            display: flex;
+            flex-direction: column;
+        }
+        .guide-card:hover {
+            box-shadow: 0 12px 28px rgba(0,0,0,0.1);
+            transform: translateY(-5px);
+        }
+        .guide-cover {
+            height: 160px;
+            background: linear-gradient(135deg, #2d6fd6, #1a4b9c);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            color: rgba(255,255,255,0.9);
+            font-weight: bold;
+            letter-spacing: 4px;
+            position: relative;
+        }
+        .guide-cover .tag {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: #ffd966;
+            color: #0f3c7a;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 30px;
+        }
+        .guide-content {
+            padding: 24px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .guide-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #1e3e68;
+        }
+        .guide-content p {
+            color: #5b7590;
+            font-size: 0.95rem;
+            flex: 1;
+        }
+        .guide-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 18px;
+            font-size: 0.85rem;
+            color: #8ba0b8;
+            border-top: 1px dashed #e2eaf3;
+            padding-top: 14px;
+        }
+        /* 武器推荐 */
+        .weapons {
+            background: #e8f0fe;
+            padding: 50px 0;
+            border-radius: 60px 60px 0 0;
+        }
+        .weapon-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .weapon-card {
+            background: #fff;
+            border-radius: 22px;
+            padding: 30px;
+            box-shadow: 0 8px 18px rgba(18, 58, 110, 0.1);
+            border-top: 5px solid #ff9f43;
+            transition: all 0.3s;
+        }
+        .weapon-card:nth-child(2) {
+            border-top-color: #2ecc71;
+        }
+        .weapon-card:nth-child(3) {
+            border-top-color: #e74c3c;
+        }
+        .weapon-card:hover {
+            transform: scale(1.02);
+        }
+        .weapon-name {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #1b3f6b;
+        }
+        .weapon-name .icon {
+            font-size: 2.2rem;
+        }
+        .weapon-desc {
+            color: #4b6584;
+            margin-bottom: 16px;
+            font-size: 0.95rem;
+        }
+        .weapon-stats {
+            background: #f8fbff;
+            border-radius: 12px;
+            padding: 14px;
+            font-size: 0.9rem;
+            color: #2c5b96;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .weapon-stats span {
+            background: #dce9fb;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-weight: 500;
+        }
+        /* 副本攻略 */
+        .dungeons {
+            padding: 50px 0;
+        }
+        .dungeon-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 20px;
+        }
+        .dungeon-item {
+            background: #fff;
+            border-radius: 18px;
+            padding: 24px 28px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+            border-left: 6px solid #2d6fd6;
+            transition: 0.2s;
+        }
+        .dungeon-item:hover {
+            border-left-color: #ff9f43;
+            background: #fbfdff;
+        }
+        .dungeon-item h3 {
+            font-size: 1.2rem;
+            color: #1b3a5e;
+            margin-bottom: 8px;
+        }
+        .dungeon-item p {
+            color: #5e7a9a;
+            font-size: 0.95rem;
+        }
+        .dungeon-item .diff {
+            display: inline-block;
+            margin-top: 12px;
+            background: #e8f0fe;
+            color: #0f3c7a;
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        /* 社区互动 */
+        .community {
+            background: #1b3a5e;
+            padding: 60px 0;
+            color: #fff;
+            border-radius: 0 0 60px 60px;
+        }
+        .community-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            align-items: center;
+        }
+        .community-text h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #ffd966;
+        }
+        .community-text p {
+            margin-bottom: 24px;
+            color: #c4d8f0;
+            line-height: 1.9;
+        }
+        .community-features {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .community-feature {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: rgba(255,255,255,0.06);
+            padding: 16px 20px;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .community-feature .num {
+            background: #ffd966;
+            color: #0f3c7a;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+        .community-feature h4 {
+            font-size: 1.1rem;
+            color: #fff;
+        }
+        .community-feature p {
+            color: #b0cbe8;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        /* FAQ */
+        .faq {
+            padding: 50px 0 30px;
+        }
+        .faq-list {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .faq-item {
+            background: #fff;
+            border-radius: 16px;
+            padding: 24px 30px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+            border: 1px solid #e9f0f7;
+        }
+        .faq-item h3 {
+            font-size: 1.1rem;
+            color: #1a3b60;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .faq-item h3::before {
+            content: 'Q';
+            background: #2d6fd6;
+            color: #fff;
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+        .faq-item p {
+            color: #4a6a8a;
+            padding-left: 40px;
+            font-size: 0.95rem;
+        }
+        /* 页脚 */
+        .site-footer {
+            background: #0b1d33;
+            color: #8fa8c8;
+            padding: 40px 0 30px;
+            margin-top: 30px;
+        }
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        .footer-brand h3 {
+            color: #fff;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        .footer-brand p {
+            max-width: 280px;
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+        .footer-links h4 {
+            color: #d0e0f5;
+            margin-bottom: 14px;
+            font-size: 1rem;
+        }
+        .footer-links ul li {
+            margin-bottom: 8px;
+        }
+        .footer-links a {
+            color: #8fa8c8;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+        .footer-links a:hover {
+            color: #ffd966;
+        }
+        .copyright {
+            text-align: center;
+            border-top: 1px solid #1b3450;
+            margin-top: 30px;
+            padding-top: 20px;
+            font-size: 0.85rem;
+        }
+        /* 响应式 */
+        @media (max-width: 992px) {
+            .feature-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .guide-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .weapon-grid {
+                grid-template-columns: 1fr;
+            }
+            .community-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+        }
+        @media (max-width: 768px) {
+            .header-inner {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            .main-nav ul {
+                justify-content: center;
+                gap: 16px;
+            }
+            .hero {
+                padding: 40px 0 50px;
+            }
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            .section-title {
+                font-size: 1.7rem;
+                white-space: normal;
+                left: auto;
+                transform: none;
+                display: block;
+                text-align: center;
+            }
+            .section-title::after {
+                width: 60px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .feature-grid,
+            .guide-grid,
+            .dungeon-list {
+                grid-template-columns: 1fr;
+            }
+            .weapon-grid {
+                grid-template-columns: 1fr;
+            }
+            .faq-item p {
+                padding-left: 0;
+            }
+            .footer-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+            .footer-brand p {
+                margin: 0 auto;
+            }
+            .community-feature {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+            .logo-area h1 {
+                font-size: 1.6rem;
+            }
+            .btn-hero, .btn-ghost {
+                padding: 10px 24px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="logo-area">
+                <h1>gtv<span>弹弹堂</span></h1>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#features">游戏特色</a></li>
+                    <li><a href="#guides">新手攻略</a></li>
+                    <li><a href="#weapons">武器推荐</a></li>
+                    <li><a href="#dungeons">副本指南</a></li>
+                    <li><a href="#community">玩家社区</a></li>
+                    <li><a href="#faq">常见问题</a></li>
+                </ul>
+            </nav>
+            <div class="user-entry">
+                <a href="#" class="btn btn-outline-light">登录</a>
+                <a href="#" class="btn btn-light">注册</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h2>弹射竞技，一触即发</h2>
+            <p>gtv弹弹堂是一款集策略、操作与社交于一体的休闲竞技网页游戏。调整角度、蓄力发射，在缤纷地图中与好友同台对战，体验百变玩法带来的乐趣。</p>
+            <div class="hero-buttons">
+                <a href="#" class="btn-hero">开始游戏</a>
+                <a href="#guides" class="btn-ghost">查看新手攻略</a>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <!-- 游戏特色 -->
+        <section class="features" id="features">
+            <div class="container">
+                <h2 class="section-title">游戏核心特色</h2>
+                <p class="section-sub">从经典弹射对战到丰富养成系统，gtv弹弹堂为每位玩家提供充满惊喜的冒险旅程</p>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <span class="feature-icon">🎯</span>
+                        <h3>精准弹射</h3>
+                        <p>风向、角度、力度多方考量，每一次出手都是智慧与技巧的较量，体验真实物理弹道。</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">⚔️</span>
+                        <h3>多样武器</h3>
+                        <p>数十种造型与属性各异的武器可供收集，搭配不同战斗风格，打造专属战术体系。</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">👥</span>
+                        <h3>多人同屏</h3>
+                        <p>支持多人实时对战与组队闯关，与好友并肩作战，或者来一场刺激的竞技对决。</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">🏆</span>
+                        <h3>赛季排行</h3>
+                        <p>定期开启赛季模式，冲击排行榜获取专属奖励，证明自己的实力与荣耀。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 热门攻略 -->
+        <section class="guides" id="guides">
+            <div class="container">
+                <h2 class="section-title">新手入门与进阶攻略</h2>
+                <p class="section-sub">无论你是初次接触弹射游戏，还是想要提升操作技巧，这里都有实用内容</p>
+                <div class="guide-grid">
+                    <article class="guide-card">
+                        <div class="guide-cover">
+                            <span class="tag">入门必备</span>
+                            🕹️
+                        </div>
+                        <div class="guide-content">
+                            <h3>gtv弹弹堂基础操作指南</h3>
+                            <p>掌握移动、瞄准、发射的基础操作，了解力度条与角度盘的使用技巧，快速适应游戏节奏。</p>
+                            <div class="guide-meta">
+                                <span>浏览 2.1k</span>
+                                <span>更新于本周</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="guide-card">
+                        <div class="guide-cover">
+                            <span class="tag">进阶技巧</span>
+                            🧭
+                        </div>
+                        <div class="guide-content">
+                            <h3>高抛打法与风速计算</h3>
+                            <p>详解高抛打法的核心公式，如何根据风速微调角度与力度，在远距离对战中占据优势。</p>
+                            <div class="guide-meta">
+                                <span>浏览 3.8k</span>
+                                <span>热门攻略</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="guide-card">
+                        <div class="guide-cover">
+                            <span class="tag">资源规划</span>
+                            💎
+                        </div>
+                        <div class="guide-content">
+                            <h3>新手资源合理利用指南</h3>
+                            <p>金币、钻石、强化石如何使用性价比更高？避免常见浪费误区，让你的成长之路更顺畅。</p>
+                            <div class="guide-meta">
+                                <span>浏览 1.6k</span>
+                                <span>玩家推荐</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- 武器推荐 -->
+        <section class="weapons" id="weapons">
+            <div class="container">
+                <h2 class="section-title">热门武器搭配推荐</h2>
+                <p class="section-sub">不同武器拥有独特手感与战术定位，选择适合你的武器，发挥最大战斗力</p>
+                <div class="weapon-grid">
+                    <div class="weapon-card">
+                        <div class="weapon-name">
+                            <span class="icon">🔥</span> 炽焰之翼
+                        </div>
+                        <p class="weapon-desc">高爆发型武器，适合喜欢激进打法的玩家。暴击率优秀，配合怒技能可造成大量伤害。</p>
+                        <div class="weapon-stats">
+                            <span>攻击 ★★★★★</span>
+                            <span>速度 ★★★☆</span>
+                            <span>暴击 ★★★★</span>
+                        </div>
+                    </div>
+                    <div class="weapon-card">
+                        <div class="weapon-name">
+                            <span class="icon">❄️</span> 寒冰之息
+                        </div>
+                        <p class="weapon-desc">控制型武器，攻击附带减速效果，适合团队配合。在多人副本中能有效限制敌方行动。</p>
+                        <div class="weapon-stats">
+                            <span>攻击 ★★★☆</span>
+                            <span>控制 ★★★★★</span>
+                            <span>防御 ★★★★</span>
+                        </div>
+                    </div>
+                    <div class="weapon-card">
+                        <div class="weapon-name">
+                            <span class="icon">⚡</span> 雷霆之怒
+                        </div>
+                        <p class="weapon-desc">均衡型武器，各项属性较为全面，拥有不错的连击能力，适合新手玩家稳定发挥。</p>
+                        <div class="weapon-stats">
+                            <span>攻击 ★★★★</span>
+                            <span>速度 ★★★★</span>
+                            <span>稳定 ★★★★★</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 副本攻略 -->
+        <section class="dungeons" id="dungeons">
+            <div class="container">
+                <h2 class="section-title">经典副本打法要点</h2>
+                <p class="section-sub">熟悉各副本机制与怪物特点，能让你事半功倍，顺利获取稀有奖励</p>
+                <div class="dungeon-list">
+                    <div class="dungeon-item">
+                        <h3>暗影迷宫</h3>
+                        <p>地形复杂，视野受限。建议携带侦查类道具，团队中至少保留一名治疗职业，注意躲避暗影陷阱。</p>
+                        <span class="diff">难度：中等</span>
+                    </div>
+                    <div class="dungeon-item">
+                        <h3>熔岩核心</h3>
+                        <p>地面会周期喷发熔岩，对站位要求较高。优先击杀远程小怪，BOSS狂暴阶段需及时分散。</p>
+                        <span class="diff">难度：较高</span>
+                    </div>
+                    <div class="dungeon-item">
+                        <h3>风暴之眼</h3>
+                        <p>强风环境会影响弹道，需要灵活调整角度。利用风场可以跳至高处，获得更好的攻击位置。</p>
+                        <span class="diff">难度：中等</span>
+                    </div>
+                    <div class="dungeon-item">
+                        <h3>冰封王座</h3>
+                        <p>BOSS具有冰冻技能，被命中后行动受限。建议携带净化药水，并注意地面滑冰效果。</p>
+                        <span class="diff">难度：挑战</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 社区互动 -->
+        <section class="community" id="community">
+            <div class="container">
+                <div class="community-grid">
+                    <div class="community-text">
+                        <h2>加入玩家大家庭</h2>
+                        <p>gtv弹弹堂拥有活跃的玩家社区，这里不仅有热心大佬答疑解惑，还有定期举办的趣味活动。分享你的高光时刻，结识志同道合的弹友，一起享受游戏带来的快乐。</p>
+                        <div style="display:flex; gap:16px; flex-wrap:wrap;">
+                            <a href="#" class="btn btn-light">进入论坛</a>
+                            <a href="#" class="btn btn-ghost" style="border-color: #ffd966; color:#ffd966;">加入公会</a>
+                        </div>
+                    </div>
+                    <div class="community-features">
+                        <div class="community-feature">
+                            <span class="num">1</span>
+                            <div>
+                                <h4>攻略互助</h4>
+                                <p>卡关?不懂搭配?发帖提问，众多玩家为你支招。</p>
+                            </div>
+                        </div>
+                        <div class="community-feature">
+                            <span class="num">2</span>
+                            <div>
+                                <h4>精彩赛事</h4>
+                                <p>官方与玩家联合举办竞技赛，展现你的操作风采。</p>
+                            </div>
+                        </div>
+                        <div class="community-feature">
+                            <span class="num">3</span>
+                            <div>
+                                <h4>福利活动</h4>
+                                <p>签到、节日活动、社区任务，丰富奖励等你领取。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="faq" id="faq">
+            <div class="container">
+                <h2 class="section-title">常见问题解答</h2>
+                <p class="section-sub">关于游戏与平台，你可能关心的问题都在这里</p>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <h3>gtv弹弹堂需要下载客户端吗？</h3>
+                        <p>不需要。gtv弹弹堂是一款网页游戏，通过主流浏览器即可直接游玩，无需安装额外程序，方便快捷。</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>游戏对电脑配置要求高吗？</h3>
+                        <p>配置要求较低，一般办公或家用电脑均可流畅运行。建议使用较新版本的浏览器，并确保网络连接稳定，以获得最佳体验。</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>新手如何快速提升战斗力？</h3>
+                        <p>建议优先完成主线任务获取基础资源，合理强化主武器，并加入活跃公会获取额外加成。同时参考本站的新手攻略，避免资源浪费。</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>游戏内是否支持与好友组队？</h3>
+                        <p>支持。你可以添加游戏内好友，创建或加入队伍，共同参与副本挑战或进行友谊对战，互动性很强。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-inner">
+                <div class="footer-brand">
+                    <h3>gtv弹弹堂</h3>
+                    <p>专注弹射对战乐趣，提供专业攻略与玩家交流平台。无论新手还是老玩家，这里都有属于你的一片天地。</p>
+                </div>
+                <div class="footer-links">
+                    <h4>游戏指南</h4>
+                    <ul>
+                        <li><a href="#">新手教程</a></li>
+                        <li><a href="#">武器图鉴</a></li>
+                        <li><a href="#">副本大全</a></li>
+                        <li><a href="#">活动公告</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>玩家支持</h4>
+                    <ul>
+                        <li><a href="#">联系客服</a></li>
+                        <li><a href="#">论坛反馈</a></li>
+                        <li><a href="#">违规举报</a></li>
+                        <li><a href="#">帮助中心</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>友情链接</h4>
+                    <ul>
+                        <li><a href="#">弹弹堂官网</a></li>
+                        <li><a href="#">玩家社区</a></li>
+                        <li><a href="#">游戏百科</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2025 gtv弹弹堂玩家平台 版权所有 | 本页面为玩家交流与攻略分享用途，请适度游戏，享受健康生活。</p>
+            </div>
+        </div>
+    </footer>
+</body>
+          </html>
